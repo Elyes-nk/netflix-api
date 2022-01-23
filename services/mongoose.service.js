@@ -8,7 +8,7 @@ exports.dbConnect = () => {
       useUnifiedTopology: true,
       useCreateIndex: true,
     })
-    .then(() => console.log("DATABASE Connection Successfull ✅"))
+    .then(() => console.log("DATABASE Connection Successfull 🔥🔥🔥 "))
     .catch((err) => {
       console.error(err);
     });
