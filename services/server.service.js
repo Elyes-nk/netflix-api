@@ -14,20 +14,20 @@ app.use('/api', apiRouter);
 
 
 //==================================================couche graphQl=====================================================
-const { ApolloServer, gql } = require('apollo-server-express');
-const MovieSchema = require('../graphQl/schemas/movie.schema');
-const ListSchema = require('../graphQl/schemas/list.schema');
-const UserSchema = require('../graphQl/schemas/user.schema');
+// const { ApolloServer, gql } = require('apollo-server-express');
+// const MovieSchema = require('../graphql/schemas/movie.schema');
+// const ListSchema = require('../graphql/schemas/list.schema');
+// const UserSchema = require('../graphql/schemas/user.schema');
 
-const MovieResolvers = require('../graphQl/resolvers/movie.resolver');
-const ListResolvers = require('../graphQl/resolvers/list.resolver');
-const UserResolvers = require('../graphQl/resolvers/user');
+// const MovieResolvers = require('../graphql/resolvers/movie.resolver');
+// const ListResolvers = require('../graphql/resolvers/list.resolver');
+// const UserResolvers = require('../graphql/resolvers/user');
 
-const graphQlServer = new ApolloServer({
-  typeDefs: [MovieSchema,ListSchema,UserSchema],
-  resolvers:[MovieResolvers,ListResolvers,UserResolvers]
-});
-graphQlServer.applyMiddleware({ app, path: '/graphql' })
+// const graphQlServer = new ApolloServer({
+//   typeDefs: [MovieSchema,ListSchema,UserSchema],
+//   resolvers:[MovieResolvers,ListResolvers,UserResolvers]
+// });
+// graphQlServer.applyMiddleware({ app, path: '/graphql' })
 //======================================================================================================================
 
 
