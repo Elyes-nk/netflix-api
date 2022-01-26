@@ -15,7 +15,7 @@ exports.create = async (req, res) => {
 }
 
 exports.update = async (req, res) => {
-    if (req.user.isAdmin) {
+    // if (req.user.isAdmin) {
       try {
         const updatedMovie = await Movie.findByIdAndUpdate(
           req.params.id,
@@ -28,22 +28,22 @@ exports.update = async (req, res) => {
       } catch (err) {
         res.status(500).json(err);
       }
-    } else {
-      res.status(403).json("You are not allowed!");
-    }
+    // } else {
+    //   res.status(403).json("You are not allowed!");
+    // }
 }
 
 exports.delete = async (req, res) => {
-    if (req.user.isAdmin) {
+    // if (req.user.isAdmin) {
       try {
         await Movie.findByIdAndDelete(req.params.id);
         res.status(200).json("The movie has been deleted...");
       } catch (err) {
         res.status(500).json(err);
       }
-    } else {
-      res.status(403).json("You are not allowed!");
-    }
+    // } else {
+    //   res.status(403).json("You are not allowed!");
+    // }
 }
 
 exports.get = async (req, res) => {
@@ -77,14 +77,14 @@ exports.getRandom = async (req, res) => {
 }
 
 exports.getAll = async (req, res) => {
-    if (req.user.isAdmin) {
+    // if (req.user.isAdmin) {
       try {
         const movies = await Movie.find();
         res.status(200).json(movies.reverse());
       } catch (err) {
         res.status(500).json(err);
       }
-    } else {
-      res.status(403).json("You are not allowed!");
-    }
+    // } else {
+    //   res.status(403).json("You are not allowed!");
+    // }
 }
