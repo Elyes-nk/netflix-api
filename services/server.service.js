@@ -23,9 +23,13 @@ app.use('/api', apiRouter);
 // const ListResolvers = require('../graphql/resolvers/list.resolver');
 // const UserResolvers = require('../graphql/resolvers/user');
 
+// const Auth = require('../graphQl/auth/auth');
+
+
 // const graphQlServer = new ApolloServer({
 //   typeDefs: [MovieSchema,ListSchema,UserSchema],
-//   resolvers:[MovieResolvers,ListResolvers,UserResolvers]
+//   resolvers:[MovieResolvers,ListResolvers,UserResolvers],
+//   context: Auth   
 // });
 // graphQlServer.applyMiddleware({ app, path: '/graphql' })
 //======================================================================================================================
