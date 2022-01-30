@@ -13,12 +13,16 @@ const initiateStripeSession = async (req) => {
             product_data: {
               name: req.body.name
             },
-            unit_amount: req.body.price*100,
+            unit_amount: req.body.price*req.body.subscribtionMounths*100,
           },
           quantity: 1
         },
         payment_intent_data:{
-          metadata:{userId:req.body.userId, productsId:JSON.stringify(productsId)},
+          metadata:{
+            userId:req.body.userId, 
+            subscribtionId:req.body.subscribtionId, 
+            subscribtionMounths:req.body.subscribtionMounths
+          },
         },
         mode: "payment",
         success_url: `${process.env.CLIENT_URL}/`,

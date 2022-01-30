@@ -1,11 +1,11 @@
-const Movie = require("../models/Movie");
+const Serie = require("../models/Serie");
 
 exports.create = async (req, res) => {
     // if (req.user.isAdmin) {
-      const newMovie = new Movie(req.body);
+      const newSerie = new Serie(req.body);
       try {
-        const savedMovie = await newMovie.save();
-        res.status(201).json(savedMovie);
+        const savedSerie = await newSerie.save();
+        res.status(201).json(savedSerie);
       } catch (err) {
         res.status(500).json(err);
       }
@@ -17,14 +17,14 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
     // if (req.user.isAdmin) {
       try {
-        const updatedMovie = await Movie.findByIdAndUpdate(
+        const updatedSerie = await Serie.findByIdAndUpdate(
           req.params.id,
           {
             $set: req.body,
           },
           { new: true }
         );
-        res.status(200).json(updatedMovie);
+        res.status(200).json(updatedSerie);
       } catch (err) {
         res.status(500).json(err);
       }
@@ -36,8 +36,8 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
     // if (req.user.isAdmin) {
       try {
-        await Movie.findByIdAndDelete(req.params.id);
-        res.status(200).json("The movie has been deleted...");
+        await Serie.findByIdAndDelete(req.params.id);
+        res.status(200).json("The serie has been deleted...");
       } catch (err) {
         res.status(500).json(err);
       }
@@ -48,8 +48,8 @@ exports.delete = async (req, res) => {
 
 exports.get = async (req, res) => {
     try {
-      const movie = await Movie.findById(req.params.id).populate("genre");
-      res.status(200).json(movie);
+      const serie = await Serie.findById(req.params.id).populate("genre");
+      res.status(200).json(serie);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -57,11 +57,10 @@ exports.get = async (req, res) => {
 
 exports.getRandom = async (req, res) => {
     try {
-      const movie = await Movie.aggregate([
-        { $match: { isSeries: false } },
+      const serie = await Serie.aggregate([
         { $sample: { size: 1 } },
       ]);
-      res.status(200).json(movie);
+      res.status(200).json(serie);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -70,8 +69,8 @@ exports.getRandom = async (req, res) => {
 exports.getAll = async (req, res) => {
     // if (req.user.isAdmin) {
       try {
-        const movies = await Movie.find();
-        res.status(200).json(movies.reverse());
+        const series = await Serie.find();
+        res.status(200).json(series.reverse());
       } catch (err) {
         res.status(500).json(err);
       }

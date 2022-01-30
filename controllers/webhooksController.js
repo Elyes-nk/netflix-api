@@ -31,8 +31,12 @@ exports.stripewebhook = (req, res) => {
   switch (eventType) {
 
     case "payment_intent.succeeded":
-      //TODO actualisé user 
-      
+      User.findByIdAndUpdate(data.object.userId,
+        {
+          subscribtion: data.object.metadata.subscribtionId,
+          subscribtionDate: Date.now, 
+          subscribtionMounths: data.object.metadata.subscribtionMounths
+        }).catch((err) => {console.log(err);})
       break;
     default:
   }

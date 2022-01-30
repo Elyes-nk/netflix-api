@@ -1,11 +1,11 @@
-const Movie = require("../models/Movie");
+const Subscribtion = require("../models/Subscribtion");
 
 exports.create = async (req, res) => {
     // if (req.user.isAdmin) {
-      const newMovie = new Movie(req.body);
+      const newSubscribtion = new Subscribtion(req.body);
       try {
-        const savedMovie = await newMovie.save();
-        res.status(201).json(savedMovie);
+        const savedSubscribtion = await newSubscribtion.save();
+        res.status(201).json(savedSubscribtion);
       } catch (err) {
         res.status(500).json(err);
       }
@@ -17,14 +17,14 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
     // if (req.user.isAdmin) {
       try {
-        const updatedMovie = await Movie.findByIdAndUpdate(
+        const updatedSubscribtion = await Subscribtion.findByIdAndUpdate(
           req.params.id,
           {
             $set: req.body,
           },
           { new: true }
         );
-        res.status(200).json(updatedMovie);
+        res.status(200).json(updatedSubscribtion);
       } catch (err) {
         res.status(500).json(err);
       }
@@ -36,8 +36,8 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
     // if (req.user.isAdmin) {
       try {
-        await Movie.findByIdAndDelete(req.params.id);
-        res.status(200).json("The movie has been deleted...");
+        await Subscribtion.findByIdAndDelete(req.params.id);
+        res.status(200).json("The subscribtion has been deleted...");
       } catch (err) {
         res.status(500).json(err);
       }
@@ -48,20 +48,8 @@ exports.delete = async (req, res) => {
 
 exports.get = async (req, res) => {
     try {
-      const movie = await Movie.findById(req.params.id).populate("genre");
-      res.status(200).json(movie);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-}
-
-exports.getRandom = async (req, res) => {
-    try {
-      const movie = await Movie.aggregate([
-        { $match: { isSeries: false } },
-        { $sample: { size: 1 } },
-      ]);
-      res.status(200).json(movie);
+      const subscribtion = await Subscribtion.findById(req.params.id);
+      res.status(200).json(subscribtion);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -70,8 +58,8 @@ exports.getRandom = async (req, res) => {
 exports.getAll = async (req, res) => {
     // if (req.user.isAdmin) {
       try {
-        const movies = await Movie.find();
-        res.status(200).json(movies.reverse());
+        const subscribtions = await Subscribtion.find();
+        res.status(200).json(subscribtions.reverse());
       } catch (err) {
         res.status(500).json(err);
       }
