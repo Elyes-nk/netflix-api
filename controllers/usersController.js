@@ -50,6 +50,16 @@ exports.get = async (req, res) => {
     }
 }
 
+exports.getWichlist = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).populate("wichlist");
+    const { wichlist, ...info } = user._doc;
+    res.status(200).json(wichlist);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
 exports.getAll = async (req, res) => {
     const query = req.query.new;
     // if (req.user.isAdmin) {

@@ -10,7 +10,8 @@ const UserSchema = new Schema(
     isAdmin: { type: Boolean, default: false },
     subscribtion: { type: Schema.Types.ObjectId, ref: 'Subscribtion' },
     subscribtionDate: { type: Date },
-    subscribtionMounths: { type:Number, default:0 }
+    subscribtionMounths: { type:Number, default:0 },
+    wichlist: [{ type: Schema.Types.ObjectId, ref: 'Movie'}]
   },
   { timestamps: true }
 );

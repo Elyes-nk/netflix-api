@@ -15,6 +15,9 @@ usersController.delete);
 //GET
 router.get("/find/:id", usersController.get);
 
+//GET WICHLIST
+router.get("/wichlist/:id", usersController.getWichlist);
+
 //GET ALL
 router.get("/", 
 // verify, 
