@@ -1,5 +1,7 @@
 require("dotenv").config();
-const Order = require("../models/Order");
+const User = require("../models/User");
+const Transaction = require("../models/Transaction");
+
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.stripewebhook = (req, res) => {
@@ -29,14 +31,19 @@ exports.stripewebhook = (req, res) => {
   }
   console.log(eventType);
   switch (eventType) {
-
     case "payment_intent.succeeded":
-      User.findByIdAndUpdate(data.object.userId,
-        {
-          subscribtion: data.object.metadata.subscribtionId,
-          subscribtionDate: Date.now, 
-          subscribtionMounths: data.object.metadata.subscribtionMounths
-        }).catch((err) => {console.log(err);})
+        User.findByIdAndUpdate(data.object.userId,
+          {
+            subscribtion: data.object.metadata.subscribtionId,
+            subscribtionDate: Date.now, 
+            subscribtionMounths: data.object.metadata.subscribtionMounths
+          }).catch((err) => {console.log(err);})
+        new Transaction({
+            user: data.object.userId,
+            subscribtion: data.object.metadata.subscribtionId,
+            date: Date.now,
+            status: "Approved"
+          }).catch((err) => {console.log(err);})
       break;
     default:
   }

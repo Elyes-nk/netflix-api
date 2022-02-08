@@ -8,6 +8,7 @@ const seriesRouter = require('./series.route');
 const usersRouter = require('./users.route');
 const genreRouter = require('./genres.route');
 const subscribtionsRouter = require('./subscribtions.route');
+const transactionsRouter = require('./transactions.route');
 
 
 
@@ -19,6 +20,8 @@ router.use('/series',seriesRouter);
 router.use('/users', usersRouter);
 router.use('/genres', genreRouter);
 router.use('/subscribtions', subscribtionsRouter);
+router.use('/transactions', transactionsRouter);
+
 //================================================
 
 module.exports = router;
