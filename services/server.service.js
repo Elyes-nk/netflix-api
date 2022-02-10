@@ -6,7 +6,7 @@ const apiRouter = require('../routes');
 require("dotenv").config();
 
 //===========================================WEBHOOKS MIDDELWARE========================================================
-// app.use('/api/webhooks/stripe', express.raw({type: "*/*"}))
+app.use('/api/webhooks/stripe', express.raw({type: "*/*"}))
 //======================================================================================================================
 app.use(express.json());
 app.use(cors());

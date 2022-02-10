@@ -9,7 +9,8 @@ const usersRouter = require('./users.route');
 const genreRouter = require('./genres.route');
 const subscribtionsRouter = require('./subscribtions.route');
 const transactionsRouter = require('./transactions.route');
-
+const checkoutRouter = require('./checkout.route');
+const webHooksRouter = require('./webhooks.route');
 
 
 //================== Routes ======================
@@ -21,6 +22,8 @@ router.use('/users', usersRouter);
 router.use('/genres', genreRouter);
 router.use('/subscribtions', subscribtionsRouter);
 router.use('/transactions', transactionsRouter);
+router.use('/checkout',checkoutRouter);
+router.use('/webhooks',webHooksRouter);
 
 //================================================
 

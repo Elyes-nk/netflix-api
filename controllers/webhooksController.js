@@ -31,6 +31,14 @@ exports.stripewebhook = (req, res) => {
   }
   console.log(eventType);
   switch (eventType) {
+    case "payment_intent.created":
+      new Transaction({
+          user: data.object.userId,
+          subscribtion: data.object.metadata.subscribtionId,
+          date: Date.now,
+          status: "Pending"
+        }).catch((err) => {console.log(err);})
+    break;
     case "payment_intent.succeeded":
         User.findByIdAndUpdate(data.object.userId,
           {
@@ -44,7 +52,15 @@ exports.stripewebhook = (req, res) => {
             date: Date.now,
             status: "Approved"
           }).catch((err) => {console.log(err);})
-      break;
+    break;
+    case "payment_intent.payment_failed":
+      new Transaction({
+          user: data.object.userId,
+          subscribtion: data.object.metadata.subscribtionId,
+          date: Date.now,
+          status: "Declined"
+        }).catch((err) => {console.log(err);})
+    break;
     default:
   }
   res.sendStatus(200);
