@@ -32,35 +32,47 @@ exports.stripewebhook = (req, res) => {
   console.log(eventType);
   switch (eventType) {
     case "payment_intent.created":
-      new Transaction({
-          user: data.object.userId,
+      const transactionCreated = new Transaction({
+          user: data.object.metadata.userId,
           subscribtion: data.object.metadata.subscribtionId,
-          date: Date.now,
           status: "Pending"
-        }).catch((err) => {console.log(err);})
+        })
+        transactionCreated.save().catch(err => console.log(err));
     break;
+
     case "payment_intent.succeeded":
-        User.findByIdAndUpdate(data.object.userId,
-          {
+      const updateUser = async()=> {
+      try{
+          await User.findByIdAndUpdate(
+            data.object.metadata.userId,
+            {
+              subscribtion: data.object.metadata.subscribtionId,
+              subscribtionDate: new Date(), 
+              subscribtionMounths: data.object.metadata.subscribtionMounths
+            },
+            { new: true }
+          )
+        }catch(err)
+        {console.log(err);}
+      }
+      updateUser()
+          const transaction = new Transaction({
+            user: data.object.metadata.userId,
             subscribtion: data.object.metadata.subscribtionId,
-            subscribtionDate: Date.now, 
-            subscribtionMounths: data.object.metadata.subscribtionMounths
-          }).catch((err) => {console.log(err);})
-        new Transaction({
-            user: data.object.userId,
-            subscribtion: data.object.metadata.subscribtionId,
-            date: Date.now,
             status: "Approved"
-          }).catch((err) => {console.log(err);})
+          })
+          transaction.save().catch(err => console.log(err));
     break;
+
     case "payment_intent.payment_failed":
-      new Transaction({
-          user: data.object.userId,
+      const transactionDeclined = new Transaction({
+          user: data.object.metadata.userId,
           subscribtion: data.object.metadata.subscribtionId,
-          date: Date.now,
           status: "Declined"
-        }).catch((err) => {console.log(err);})
+        })
+        transactionDeclined.save().catch(err => console.log(err));
     break;
+
     default:
   }
   res.sendStatus(200);

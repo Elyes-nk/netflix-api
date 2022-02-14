@@ -4,23 +4,22 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
 const initiateStripeSession = async (req) => {
-   
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
-        line_items: {
+        line_items: [{
           price_data: {
             currency: "eur",
             product_data: {
-              name: req.body.name
+              name: req.body.subscribtion.name
             },
-            unit_amount: req.body.price*req.body.subscribtionMounths*100,
+            unit_amount: (req.body.subscribtion.amount * req.body.subscribtionMounths * 100).toFixed(0),
           },
           quantity: 1
-        },
+        }],
         payment_intent_data:{
           metadata:{
             userId:req.body.userId, 
-            subscribtionId:req.body.subscribtionId, 
+            subscribtionId:req.body.subscribtion._id, 
             subscribtionMounths:req.body.subscribtionMounths
           },
         },
