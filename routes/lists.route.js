@@ -4,18 +4,12 @@ const listsController = require("../controllers/listsController");
 
 
 //CREATE
-router.post("/", 
-// verify, 
-listsController.create);
+router.post("/", verify, listsController.create);
 
 //DELETE
-router.delete("/:id", 
-// verify, 
-listsController.delete);
+router.delete("/:id", verify, listsController.delete);
 
 //GET
-router.get("/", 
-// verify, 
-listsController.get);
+router.get("/", verify, listsController.get);
 
 module.exports = router;

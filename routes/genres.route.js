@@ -3,23 +3,15 @@ const verify = require("../verifyToken");
 const genresController = require("../controllers/genresController");
 
 //CREATE
-router.post("/",
-//  verify,
-  genresController.create);
+router.post("/", verify, genresController.create);
 
 //UPDATE
-router.put("/:id",
-//  verify,
-  genresController.update);
+router.put("/:id", verify, genresController.update);
 
 //DELETE
-router.delete("/:id",
-//  verify,
- genresController.delete);
+router.delete("/:id", verify, genresController.delete);
 
 //GET ALL
-router.get("/",
-//  verify,
-  genresController.getAll);
+router.get("/", verify, genresController.getAll);
 
 module.exports = router;

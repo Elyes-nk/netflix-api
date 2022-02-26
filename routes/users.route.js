@@ -3,20 +3,13 @@ const verify = require("../verifyToken");
 const usersController = require("../controllers/usersController")
 
 //UPDATE
-router.put("/:id", 
-// verify, 
-usersController.update);
+router.put("/:id", verify, usersController.update);
 
 //DELETE
-router.delete("/:id", 
-// verify, 
-usersController.delete);
+router.delete("/:id", verify, usersController.delete);
 
 //GET
 router.get("/find/:id", usersController.get);
-
-//GET WICHLIST
-router.get("/wichlist/:id", usersController.getWichlist);
 
 //GET ALL
 router.get("/", 

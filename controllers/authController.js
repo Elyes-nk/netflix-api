@@ -45,4 +45,6 @@ exports.login = async (req, res) => {
     }
   }
 
- 
+ exports.verify = async (req, res) => {
+      res.status(200).json());
+  }
