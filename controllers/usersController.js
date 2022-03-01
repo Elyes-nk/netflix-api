@@ -62,7 +62,6 @@ exports.getWichlist = async (req, res) => {
 
 exports.getAll = async (req, res) => {
     const query = req.query.new;
-    if (req.user.isAdmin) {
       try {
         const users = query
           ? await User.find().sort({ _id: -1 }).limit(5)
@@ -71,9 +70,6 @@ exports.getAll = async (req, res) => {
       } catch (err) {
         res.status(500).json(err);
       }
-    } else {
-      res.status(403).json("You are not allowed to see all users!");
-    }
 }
 
 exports.getStats = async (req, res) => {
