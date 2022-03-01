@@ -9,7 +9,7 @@ router.post("/register", authController.register );
 router.post("/login", authController.login );
 
 //VERIFY TOKEN
-router.post("/verify", verify, authController.verify );
+router.get("/verify", verify, authController.verify );
 
 
 
