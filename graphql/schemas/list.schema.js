@@ -23,7 +23,7 @@ module.exports = gql`
             title:String, 
             type:String, 
             genre:String, 
-            content:Array,           
+            content:[ID],           
             ):List!
         deleteList(id:ID!):String
     }

@@ -28,7 +28,7 @@ module.exports = gql`
             video:String,
             year:String,
             limit:String,
-            genre:String,
+            genre:Array,
             isSeries:String
             ):Movie
         updateMovie(
@@ -42,7 +42,7 @@ module.exports = gql`
             video:String,
             year:String,
             limit:String,
-            genre:String,
+            genre:[ID],
             isSeries:String          
             ):Movie!
         deleteMovie(id:ID!):String
